@@ -58,4 +58,26 @@ class Note {
     required this.priority,
     required this.createdAt,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'projectId': projectId,
+      'content': content,
+      'category': category.index,
+      'priority': priority.index,
+      'createdAt': createdAt.toIso8601String(),
+    };
+  }
+
+  factory Note.fromMap(Map<String, dynamic> map) {
+    return Note(
+      id: map['id'],
+      projectId: map['projectId'],
+      content: map['content'],
+      category: NoteCategory.values[map['category']],
+      priority: NotePriority.values[map['priority']],
+      createdAt: DateTime.parse(map['createdAt']),
+    );
+  }
 }
