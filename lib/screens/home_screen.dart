@@ -6,8 +6,9 @@ import '../widgets/add_note_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   final AppState appState;
+  final bool openAddNote;
 
-  const HomeScreen({super.key, required this.appState});
+  const HomeScreen({super.key, required this.appState, this.openAddNote = false});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -15,6 +16,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  bool _hasAutoOpened = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.openAddNote) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!_hasAutoOpened) {
+          _hasAutoOpened = true;
+          _openAddNoteSheet();
+        }
+      });
+    }
+  }
 
   void _openAddNoteSheet() {
     showModalBottomSheet(
