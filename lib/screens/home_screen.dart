@@ -21,14 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.4,
-        ),
-        child: AddNoteSheet(appState: widget.appState),
-      ),
+      builder: (_) => AddNoteSheet(appState: widget.appState),
     ).then((_) {
-      setState(() {}); // refresh the UI after adding a note
+      setState(() {});
     });
   }
 
